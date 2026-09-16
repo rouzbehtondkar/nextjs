@@ -1,10 +1,12 @@
+import ClientApiDemo from "./ClientApiDemo";
+
 type Post = { id: number; title: string };
 
 export const revalidate = 20;
 
 export default async function RevalidatePage() {
   const generatedAt = new Date().toLocaleString("fa-IR");
-  const requestId = crypto.randomUUID();
+  const renderId = crypto.randomUUID();
 
   const response = await fetch("https://jsonplaceholder.typicode.com/posts/1", {
     next: { revalidate: 20 },
@@ -26,8 +28,8 @@ export default async function RevalidatePage() {
           <p className="theme-muted text-sm">نسخه فعلی صفحه</p>
           <p className="theme-text mt-2 text-2xl font-black">{generatedAt}</p>
 
-          <p className="theme-muted mt-5 text-sm">Request ID</p>
-          <p className="theme-text mt-2 break-all font-mono text-sm">{requestId}</p>
+          <p className="theme-muted mt-5 text-sm">Render ID</p>
+          <p className="theme-text mt-2 break-all font-mono text-sm">{renderId}</p>
         </div>
 
         <div className="mt-6 grid gap-4 sm:grid-cols-3">
@@ -46,19 +48,20 @@ export default async function RevalidatePage() {
         </div>
 
         <div className="mt-6 rounded-2xl border p-5" style={{ borderColor: "var(--border)" }}>
-          <p className="theme-muted">API response:</p>
+          <p className="theme-muted">Server API response:</p>
           <p className="theme-text mt-2 font-bold">#{post.id} — {post.title}</p>
         </div>
 
         <div className="mt-6 rounded-2xl bg-black/5 p-5 dark:bg-white/5">
-          <p className="theme-text font-bold">چطور Cache را ببینم؟</p>
+          <p className="theme-text font-bold">نکته مهم درباره Cache</p>
           <ol className="theme-muted mt-3 list-decimal space-y-2 pr-5 text-sm leading-7">
-            <li>این صفحه را Refresh کن.</li>
-            <li>اگر Request ID همان قبلی ماند، نسخه Cache شده را می‌بینی.</li>
-            <li>بیشتر از ۲۰ ثانیه صبر کن.</li>
-            <li>دوباره Refresh کن؛ بعد از Revalidation، Request ID جدید می‌شود.</li>
+            <li>این Fetch روی Server اجرا می‌شود؛ پس JSONPlaceholder را مستقیم در Network مرورگر نمی‌بینی.</li>
+            <li>Revalidate یعنی بعد از ۲۰ ثانیه داده اجازه بازتولید دارد؛ خودش صفحه را Refresh نمی‌کند.</li>
+            <li>Render ID برای دیدن نسخه‌ای است که Next.js تولید کرده و با Request مرورگر یکی نیست.</li>
           </ol>
         </div>
+
+        <ClientApiDemo />
       </div>
     </main>
   );
