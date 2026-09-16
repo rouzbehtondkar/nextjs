@@ -17,15 +17,21 @@ export default function CSRPage() {
       <p className="theme-muted-strong mt-5 leading-8">
         این صفحه Client Component است و state و event آن در مرورگر مدیریت می‌شود.
       </p>
+
       <div className="theme-surface mt-8 rounded-3xl border p-8" style={{ borderColor: "var(--border)" }}>
         <p className="theme-muted">زمان خوانده‌شده در مرورگر:</p>
         <p className="theme-text mt-2 text-2xl font-black">{browserTime}</p>
-        <button
-          onClick={() => setCount((value) => value + 1)}
-          className="theme-primary-button mt-6 rounded-full px-6 py-3 font-bold"
-        >
-          تعداد کلیک: {count}
-        </button>
+
+        <div className="mt-8 rounded-2xl border p-6" style={{ borderColor: "var(--border)" }}>
+          <p className="theme-muted text-sm font-bold">CSR Demo</p>
+          <p className="theme-text mt-2 text-3xl font-black">Count: {count}</p>
+          <button
+            onClick={() => setCount((value) => value + 1)}
+            className="theme-primary-button mt-5 rounded-full px-6 py-3 font-bold"
+          >
+            +1
+          </button>
+        </div>
       </div>
     </main>
   );
