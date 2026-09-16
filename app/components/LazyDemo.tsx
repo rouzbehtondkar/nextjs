@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import dynamic from "next/dynamic";
 
 const HeavyComponent = dynamic(() => import("./HeavyComponent"), {
@@ -12,5 +13,19 @@ const HeavyComponent = dynamic(() => import("./HeavyComponent"), {
 });
 
 export default function LazyDemo() {
-  return <HeavyComponent />;
+  const [showComponent, setShowComponent] = useState(false);
+
+  return (
+    <div className="mt-8 w-full">
+      <button
+        type="button"
+        onClick={() => setShowComponent(true)}
+        className="rounded-full bg-black px-5 py-3 text-white transition hover:bg-zinc-800 dark:bg-white dark:text-black dark:hover:bg-zinc-200"
+      >
+        Load Heavy Component
+      </button>
+
+      {showComponent && <HeavyComponent />}
+    </div>
+  );
 }
