@@ -27,7 +27,12 @@ export default function ProductGrid() {
                 <div className="absolute bottom-5 left-5 right-5 h-28 rounded-3xl border border-white/15 bg-white/10 backdrop-blur-md transition duration-500 group-hover:scale-[1.03]" />
               </div>
               <div className="p-6">
-                <p className="theme-muted text-xs font-bold">{product.category}</p>
+                <div className="flex items-center justify-between gap-3">
+                  <p className="theme-muted text-xs font-bold">{product.category}</p>
+                  <span className="rounded-full border border-current/10 bg-black/5 px-3 py-1 text-[11px] font-bold text-current dark:bg-white/5">
+                    {product.getDeliveryInfo()}
+                  </span>
+                </div>
                 <div className="mt-2 flex items-start justify-between gap-4">
                   <h3 className="theme-text text-lg font-black">{product.name}</h3>
                   <span className="theme-muted-strong whitespace-nowrap text-sm font-bold">{product.price.toLocaleString("fa-IR")} تومان</span>
