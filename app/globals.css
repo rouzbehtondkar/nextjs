@@ -2,13 +2,32 @@
 
 :root {
   --background: #07111f;
+  --surface: #0d1b2d;
+  --surface-alt: #091626;
   --foreground: #f8fafc;
+  --muted: #94a3b8;
+  --muted-strong: #cbd5e1;
+  --border: rgba(255, 255, 255, 0.1);
+  --border-strong: rgba(255, 255, 255, 0.16);
+  --button-text: #07111f;
+}
+
+:root[data-theme="light"] {
+  --background: #f7f8fb;
+  --surface: #ffffff;
+  --surface-alt: #eef2f7;
+  --foreground: #0f172a;
+  --muted: #64748b;
+  --muted-strong: #334155;
+  --border: rgba(15, 23, 42, 0.1);
+  --border-strong: rgba(15, 23, 42, 0.16);
+  --button-text: #ffffff;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
+  --font-sans: var(--font-vazirmatn);
   --font-mono: var(--font-geist-mono);
 }
 
@@ -24,7 +43,8 @@ body {
   margin: 0;
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-vazirmatn), Tahoma, Arial, sans-serif;
+  transition: background-color 220ms ease, color 220ms ease;
 }
 
 button,
@@ -35,4 +55,132 @@ input {
 
 button {
   font: inherit;
+}
+
+.theme-toggle {
+  border-color: var(--border-strong);
+  background: var(--surface);
+  color: var(--foreground);
+}
+
+.theme-toggle:hover {
+  border-color: var(--border-strong);
+  background: var(--surface-alt);
+}
+
+.site-header {
+  border-color: var(--border);
+  background: color-mix(in srgb, var(--background) 90%, transparent);
+}
+
+.site-header-brand {
+  color: var(--foreground);
+}
+
+.site-header-logo {
+  background: var(--foreground);
+  color: var(--background);
+}
+
+.site-header-nav {
+  color: var(--muted);
+}
+
+.site-header-nav a:hover {
+  color: var(--foreground);
+}
+
+.site-header-login {
+  color: var(--muted-strong);
+}
+
+.site-header-login:hover {
+  background: var(--surface);
+  color: var(--foreground);
+}
+
+.site-header-cta {
+  background: var(--foreground);
+  color: var(--button-text);
+}
+
+.site-header-cta:hover {
+  opacity: 0.9;
+}
+
+.home-hero,
+.home-benefits {
+  background: var(--background);
+}
+
+.home-products {
+  background: var(--surface-alt);
+}
+
+.theme-text {
+  color: var(--foreground);
+}
+
+.theme-muted {
+  color: var(--muted);
+}
+
+.theme-muted-strong {
+  color: var(--muted-strong);
+}
+
+.theme-border {
+  border-color: var(--border);
+}
+
+.theme-surface {
+  background: var(--surface);
+}
+
+.theme-surface-alt {
+  background: var(--surface-alt);
+}
+
+.theme-primary-button {
+  background: var(--foreground);
+  color: var(--button-text);
+}
+
+.theme-secondary-button {
+  border-color: var(--border-strong);
+  background: color-mix(in srgb, var(--foreground) 5%, transparent);
+  color: var(--muted-strong);
+}
+
+.theme-secondary-button:hover {
+  background: color-mix(in srgb, var(--foreground) 10%, transparent);
+}
+
+.site-footer {
+  border-color: var(--border);
+  background: var(--surface-alt);
+  color: var(--muted-strong);
+}
+
+.site-footer-heading,
+.site-footer-brand {
+  color: var(--foreground);
+}
+
+.site-footer-logo {
+  background: var(--foreground);
+  color: var(--background);
+}
+
+.site-footer-muted {
+  color: var(--muted);
+}
+
+.site-footer-link:hover {
+  color: var(--foreground);
+}
+
+.site-footer-bottom {
+  border-color: var(--border);
+  color: var(--muted);
 }
