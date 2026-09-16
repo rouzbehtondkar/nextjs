@@ -1,7 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import { FormEvent, useState } from "react";
+import { useState } from "react";
+import type { FormEvent } from "react";
 
 export default function LoginForm() {
   const [loading, setLoading] = useState(false);
@@ -36,7 +37,7 @@ export default function LoginForm() {
         </button>
       </form>
 
-      <p className="mt-8 text-center text-sm text-slate-500">حساب ندارید؟ <Link href="/login" className="font-bold text-slate-950">ساخت حساب به‌زودی</Link></p>
+      <p className="mt-8 text-center text-sm text-slate-500">حساب ندارید؟ <span className="font-bold text-slate-950">ساخت حساب به‌زودی</span></p>
     </div>
   );
 }
