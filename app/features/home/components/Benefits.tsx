@@ -6,19 +6,19 @@ const benefits = [
 
 export default function Benefits() {
   return (
-    <section id="features" className="bg-[#07111f] py-24">
+    <section id="features" className="home-benefits py-24">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <div className="max-w-2xl">
-          <p className="text-sm font-bold text-slate-500">چرا نُوا؟</p>
-          <h2 className="mt-2 text-3xl font-black tracking-tight text-white sm:text-4xl">کمتر جست‌وجو کن، بهتر انتخاب کن.</h2>
+          <p className="theme-muted text-sm font-bold">چرا نُوا؟</p>
+          <h2 className="theme-text mt-2 text-3xl font-black tracking-tight sm:text-4xl">کمتر جست‌وجو کن، بهتر انتخاب کن.</h2>
         </div>
 
-        <div className="mt-12 grid gap-px overflow-hidden rounded-[2rem] border border-white/10 bg-white/10 md:grid-cols-3">
+        <div className="theme-border mt-12 grid gap-px overflow-hidden rounded-[2rem] border md:grid-cols-3" style={{ background: "var(--border)" }}>
           {benefits.map((benefit) => (
-            <article key={benefit.number} className="bg-[#0d1b2d] p-8 lg:p-10">
-              <span className="text-xs font-black text-slate-500">{benefit.number}</span>
-              <h3 className="mt-10 text-xl font-black text-white">{benefit.title}</h3>
-              <p className="mt-3 text-sm leading-7 text-slate-400">{benefit.text}</p>
+            <article key={benefit.number} className="theme-surface p-8 lg:p-10">
+              <span className="theme-muted text-xs font-black">{benefit.number}</span>
+              <h3 className="theme-text mt-10 text-xl font-black">{benefit.title}</h3>
+              <p className="theme-muted mt-3 text-sm leading-7">{benefit.text}</p>
             </article>
           ))}
         </div>
