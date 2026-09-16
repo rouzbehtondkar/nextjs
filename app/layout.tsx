@@ -1,12 +1,13 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Geist_Mono } from "next/font/google";
+import { Vazirmatn } from "next/font/google";
 import "./globals.css";
 import SiteFooter from "./components/layout/SiteFooter";
 import SiteHeader from "./components/layout/SiteHeader";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
+const vazirmatn = Vazirmatn({
+  variable: "--font-vazirmatn",
+  subsets: ["arabic"],
 });
 
 const geistMono = Geist_Mono({
@@ -24,10 +25,10 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     <html
       lang="fa"
       dir="rtl"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      className={`${vazirmatn.variable} ${geistMono.variable} h-full antialiased`}
     >
-      <body className="min-h-full bg-[#07111f] text-slate-100">
-        <div className="min-h-screen bg-[#07111f]">
+      <body className="min-h-full">
+        <div className="min-h-screen">
           <SiteHeader />
           {children}
           <SiteFooter />
