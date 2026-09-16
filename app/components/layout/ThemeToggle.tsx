@@ -23,15 +23,33 @@ export default function ThemeToggle() {
     setTheme(nextTheme);
   };
 
+  if (!mounted) {
+    return (
+      <button
+        type="button"
+        aria-label="تغییر حالت نمایش"
+        className="theme-toggle flex h-10 items-center gap-2 rounded-full border px-3 text-sm font-bold"
+      >
+        <span aria-hidden="true">☀</span>
+        <span>تم</span>
+      </button>
+    );
+  }
+
+  const isDark = theme === "dark";
+
   return (
     <button
       type="button"
       onClick={toggleTheme}
-      aria-label={theme === "dark" ? "فعال کردن حالت روشن" : "فعال کردن حالت تیره"}
-      title={theme === "dark" ? "حالت روشن" : "حالت تیره"}
-      className="theme-toggle grid h-10 w-10 place-items-center rounded-full border text-base transition hover:-translate-y-0.5"
+      aria-label={isDark ? "فعال کردن حالت روشن" : "فعال کردن حالت تیره"}
+      title={isDark ? "حالت روشن" : "حالت تیره"}
+      className="theme-toggle flex h-10 items-center gap-2 rounded-full border px-3 text-sm font-bold transition hover:-translate-y-0.5"
     >
-      <span aria-hidden="true">{mounted && theme === "dark" ? "☀" : "☾"}</span>
+      <span aria-hidden="true" className="text-base">
+        {isDark ? "☀" : "☾"}
+      </span>
+      <span>{isDark ? "روشن" : "تیره"}</span>
     </button>
   );
 }
