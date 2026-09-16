@@ -1,4 +1,5 @@
 import ClientApiDemo from "./ClientApiDemo";
+import RevalidateTest from "./RevalidateTest";
 
 type Post = { id: number; title: string };
 
@@ -51,6 +52,8 @@ export default async function RevalidatePage() {
           <p className="theme-muted">Server API response:</p>
           <p className="theme-text mt-2 font-bold">#{post.id} — {post.title}</p>
         </div>
+
+        <RevalidateTest />
 
         <div className="mt-6 rounded-2xl bg-black/5 p-5 dark:bg-white/5">
           <p className="theme-text font-bold">نکته مهم درباره Cache</p>
