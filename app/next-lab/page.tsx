@@ -7,16 +7,18 @@ const topics = [
   ["ISR", "/next-lab/isr", "صفحه استاتیک است و بعد از زمان مشخص دوباره تولید می‌شود."],
   ["Server Component", "/next-lab/server-component", "بدون use client؛ کد کامپوننت روی سرور اجرا می‌شود."],
   ["Client Component", "/next-lab/client-component", "با use client؛ مناسب state و eventهای مرورگر."],
+  ["Data Fetching", "/next-lab/data-fetching", "REST API واقعی، fetch، loading و error handling."],
+  ["Cache", "/next-lab/cache", "force-cache، no-store و revalidation را عملی ببین."],
 ] as const;
 
 export default function NextLab() {
   return (
     <main className="mx-auto max-w-5xl px-6 py-16">
       <div className="mb-12">
-        <p className="theme-muted text-sm font-bold">Next.js Rendering Lab</p>
-        <h1 className="theme-text mt-3 text-4xl font-black">رندرینگ Next.js را با پروژه خودمان ببینیم</h1>
+        <p className="theme-muted text-sm font-bold">Next.js Lab</p>
+        <h1 className="theme-text mt-3 text-4xl font-black">Next.js را با پروژه خودمان یاد بگیریم</h1>
         <p className="theme-muted-strong mt-4 max-w-2xl leading-8">
-          هر کارت یک صفحه واقعی از همین پروژه است. وارد هر صفحه شو، رفتار آن را ببین و بعد با هم بررسی می‌کنیم چه زمانی Render اتفاق می‌افتد.
+          هر کارت یک صفحه واقعی از همین پروژه است. وارد هر صفحه شو، رفتار آن را ببین و بعد با هم بررسی می‌کنیم چه اتفاقی در Server و Browser می‌افتد.
         </p>
       </div>
 
