@@ -1,4 +1,5 @@
 import Image from "next/image";
+import LazyDemo from "./components/LazyDemo";
 
 export default function Home() {
   return (
@@ -63,6 +64,8 @@ export default function Home() {
             Documentation
           </a>
         </div>
+
+        <LazyDemo />
       </main>
     </div>
   );
