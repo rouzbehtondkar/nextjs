@@ -156,6 +156,22 @@ button {
   background: color-mix(in srgb, var(--foreground) 10%, transparent);
 }
 
+.theme-input {
+  border-color: var(--border);
+  background: var(--surface-alt);
+  color: var(--foreground);
+}
+
+.theme-input::placeholder {
+  color: var(--muted);
+}
+
+.theme-input:focus {
+  border-color: var(--border-strong);
+  background: var(--surface);
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--foreground) 5%, transparent);
+}
+
 .site-footer {
   border-color: var(--border);
   background: var(--surface-alt);
