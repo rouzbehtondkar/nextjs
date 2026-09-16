@@ -1,6 +1,7 @@
 "use client";
 
 import { useCallback, useMemo, useState } from "react";
+import type { MouseEvent } from "react";
 import ProductCard from "./ProductCard";
 import { demoProducts } from "../domain/ProductDemo";
 
@@ -20,8 +21,8 @@ export default function ProductGrid() {
     return demoProducts.filter((product) => product.category === selectedCategory);
   }, [selectedCategory]);
 
-  const handleCategoryChange = useCallback((category: string) => {
-    setSelectedCategory(category);
+  const handleCategoryChange = useCallback((event: MouseEvent<HTMLButtonElement>) => {
+    setSelectedCategory(event.currentTarget.dataset.category ?? "همه");
   }, []);
 
   return (
@@ -38,7 +39,8 @@ export default function ProductGrid() {
               <button
                 key={category}
                 type="button"
-                onClick={() => handleCategoryChange(category)}
+                data-category={category}
+                onClick={handleCategoryChange}
                 className={`rounded-full border px-4 py-2 text-xs font-bold transition ${
                   selectedCategory === category
                     ? "theme-text bg-black/5 dark:bg-white/10"
