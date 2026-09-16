@@ -3,8 +3,9 @@
 import { useState } from "react";
 import dynamic from "next/dynamic";
 
-// اینجا به Next.js می‌گوییم فعلاً کد HeavyComponent را کامل وارد نکن.
-// وقتی واقعاً به این کامپوننت نیاز شد، آن را جداگانه دانلود کن.
+// اینجا به Next.js می‌گوییم HeavyComponent را به صورت عادی و از همان ابتدا لود نکن.
+// با dynamic، کد این کامپوننت می‌تواند در یک فایل (chunk) جدا قرار بگیرد
+// و فقط زمانی که واقعاً به آن نیاز داریم، دانلود شود.
 const HeavyComponent = dynamic(() => import("./HeavyComponent"), {
   // تا زمانی که فایل HeavyComponent در حال دانلود است، این UI نمایش داده می‌شود.
   loading: () => (
@@ -13,12 +14,12 @@ const HeavyComponent = dynamic(() => import("./HeavyComponent"), {
     </div>
   ),
 
-  // یعنی این کامپوننت فقط سمت مرورگر اجرا شود، نه هنگام رندر سمت سرور.
+  // یعنی این کامپوننت فقط در مرورگر اجرا شود و در Server Rendering اجرا نشود.
   ssr: false,
 });
 
 export default function LazyDemo() {
-  // اول کار false است؛ یعنی هنوز HeavyComponent را لازم نداریم.
+  // در شروع کار false است؛ یعنی هنوز کاربر درخواست نمایش HeavyComponent را نداده است.
   const [showComponent, setShowComponent] = useState(false);
 
   return (
@@ -26,7 +27,7 @@ export default function LazyDemo() {
       <button
         type="button"
         // با کلیک کاربر، state از false به true تغییر می‌کند.
-        // بعد از این تغییر، HeavyComponent وارد صفحه می‌شود.
+        // بعد از این تغییر، شرط پایین برقرار می‌شود و HeavyComponent نمایش داده می‌شود.
         onClick={() => setShowComponent(true)}
         className="rounded-full bg-black px-5 py-3 text-white transition hover:bg-zinc-800 dark:bg-white dark:text-black dark:hover:bg-zinc-200"
       >
@@ -34,10 +35,14 @@ export default function LazyDemo() {
       </button>
 
       {/*
-        مهم‌ترین قسمت Lazy Loading همین‌جاست:
-        تا وقتی showComponent برابر false باشد، HeavyComponent رندر نمی‌شود.
-        وقتی کاربر کلیک کند و showComponent بشود true،
-        dynamic import فایل HeavyComponent را جداگانه لود می‌کند.
+        مهم‌ترین بخش Lazy Loading اینجاست:
+
+        تا وقتی showComponent برابر false باشد، HeavyComponent اصلاً رندر نمی‌شود.
+        وقتی کاربر روی دکمه کلیک کند، showComponent برابر true می‌شود.
+        در نتیجه dynamic import اجازه می‌دهد کد HeavyComponent به صورت جداگانه لود شود.
+
+        خلاصه:
+        کلیک کاربر → state=true → نمایش HeavyComponent → دانلود chunk مربوط به آن
       */}
       {showComponent && <HeavyComponent />}
     </div>
