@@ -41,15 +41,20 @@ const cartSlice = createSlice({
       }
     },
 
-    // این Action محصول را بر اساس id از سبد حذف می‌کند.
+    // این Action یک محصول را بر اساس id کاملاً از سبد حذف می‌کند.
     removeFromCart: (state, action: PayloadAction<string>) => {
       state.items = state.items.filter((item) => item.id !== action.payload);
+    },
+
+    // این Action کل سبد خرید را خالی می‌کند.
+    clearCart: (state) => {
+      state.items = [];
     },
   },
 });
 
 // Actionها را برای استفاده در کامپوننت‌ها export می‌کنیم.
-export const { addToCart, removeFromCart } = cartSlice.actions;
+export const { addToCart, removeFromCart, clearCart } = cartSlice.actions;
 
 // Reducer این Slice را به Store می‌دهیم تا Redux بداند چطور State را تغییر دهد.
 export default cartSlice.reducer;
