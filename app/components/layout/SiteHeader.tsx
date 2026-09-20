@@ -29,10 +29,14 @@ export default function SiteHeader() {
         </nav>
 
         <div className="flex items-center gap-2 sm:gap-3">
-          {/* این عدد مستقیماً از Redux می‌آید؛ با تغییر cart، Header دوباره مقدار جدید را می‌خواند. */}
-          <span className="theme-surface rounded-full border px-3 py-2 text-xs font-bold" style={{ borderColor: "var(--border)" }}>
+          {/* عدد سبد مستقیماً از Redux می‌آید و با کلیک وارد صفحه کامل سبد می‌شویم. */}
+          <Link
+            href="/cart"
+            className="theme-surface rounded-full border px-3 py-2 text-xs font-bold transition hover:-translate-y-0.5"
+            style={{ borderColor: "var(--border)" }}
+          >
             🛒 {cartCount.toLocaleString("fa-IR")}
-          </span>
+          </Link>
           <ThemeToggle />
           <Link href="/login" className="site-header-login hidden rounded-full px-4 py-2 text-sm font-bold transition sm:block">
             ورود
