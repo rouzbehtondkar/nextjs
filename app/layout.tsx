@@ -4,6 +4,7 @@ import { Vazirmatn } from "next/font/google";
 import "./globals.css";
 import SiteFooter from "./components/layout/SiteFooter";
 import SiteHeader from "./components/layout/SiteHeader";
+import StoreProvider from "./store/StoreProvider";
 
 const vazirmatn = Vazirmatn({
   variable: "--font-vazirmatn",
@@ -28,11 +29,13 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       className={`${vazirmatn.variable} ${geistMono.variable} h-full antialiased`}
     >
       <body className="min-h-full">
-        <div className="min-h-screen">
-          <SiteHeader />
-          {children}
-          <SiteFooter />
-        </div>
+        <StoreProvider>
+          <div className="min-h-screen">
+            <SiteHeader />
+            {children}
+            <SiteFooter />
+          </div>
+        </StoreProvider>
       </body>
     </html>
   );
