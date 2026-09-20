@@ -29,6 +29,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       className={`${vazirmatn.variable} ${geistMono.variable} h-full antialiased`}
     >
       <body className="min-h-full">
+        {/* Redux را در بالاترین سطح قرار می‌دهیم تا Header و صفحات همگی به Store دسترسی داشته باشند. */}
         <StoreProvider>
           <div className="min-h-screen">
             <SiteHeader />
