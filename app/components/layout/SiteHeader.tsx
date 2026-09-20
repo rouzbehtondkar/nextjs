@@ -5,6 +5,8 @@ import ThemeToggle from "./ThemeToggle";
 import { useAppSelector } from "../../store/hooks";
 
 export default function SiteHeader() {
+  // فقط اطلاعات مورد نیاز Header را از Redux می‌خوانیم.
+  // مجموع quantityها تعداد کل آیتم‌های داخل سبد را به ما می‌دهد.
   const cartCount = useAppSelector((state) =>
     state.cart.items.reduce((total, item) => total + item.quantity, 0),
   );
@@ -27,6 +29,7 @@ export default function SiteHeader() {
         </nav>
 
         <div className="flex items-center gap-2 sm:gap-3">
+          {/* این عدد مستقیماً از Redux می‌آید؛ با تغییر cart، Header دوباره مقدار جدید را می‌خواند. */}
           <span className="theme-surface rounded-full border px-3 py-2 text-xs font-bold" style={{ borderColor: "var(--border)" }}>
             🛒 {cartCount.toLocaleString("fa-IR")}
           </span>
