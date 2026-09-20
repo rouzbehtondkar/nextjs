@@ -1,5 +1,9 @@
+"use client";
+
 import { memo } from "react";
 import type { Product } from "../domain/Product";
+import { addToCart } from "../../../store/cartSlice";
+import { useAppDispatch } from "../../../store/hooks";
 
 type ProductCardProps = {
   product: Product;
@@ -13,6 +17,18 @@ const productTones = [
 ];
 
 function ProductCard({ product, index }: ProductCardProps) {
+  const dispatch = useAppDispatch();
+
+  const handleAddToCart = () => {
+    dispatch(
+      addToCart({
+        id: product.name,
+        name: product.name,
+        price: product.price,
+      }),
+    );
+  };
+
   return (
     <article className="theme-surface group overflow-hidden rounded-[1.75rem] border transition duration-300 hover:-translate-y-1 hover:shadow-2xl hover:shadow-black/10" style={{ borderColor: "var(--border)" }}>
       <div className={`relative aspect-[4/3] overflow-hidden bg-gradient-to-br ${productTones[index % productTones.length]}`}>
@@ -31,7 +47,13 @@ function ProductCard({ product, index }: ProductCardProps) {
           <h3 className="theme-text text-lg font-black">{product.name}</h3>
           <span className="theme-muted-strong whitespace-nowrap text-sm font-bold">{product.price.toLocaleString("fa-IR")} تومان</span>
         </div>
-        <button className="theme-secondary-button mt-6 w-full rounded-2xl border py-3 text-sm font-bold transition">افزودن به سبد</button>
+        <button
+          type="button"
+          onClick={handleAddToCart}
+          className="theme-secondary-button mt-6 w-full rounded-2xl border py-3 text-sm font-bold transition"
+        >
+          افزودن به سبد
+        </button>
       </div>
     </article>
   );
