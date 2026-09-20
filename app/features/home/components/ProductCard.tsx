@@ -17,8 +17,10 @@ const productTones = [
 ];
 
 function ProductCard({ product, index }: ProductCardProps) {
+  // dispatch راه ارتباط کامپوننت با Redux برای ارسال Action است.
   const dispatch = useAppDispatch();
 
+  // با کلیک روی دکمه، اطلاعات محصول را به Redux می‌فرستیم.
   const handleAddToCart = () => {
     dispatch(
       addToCart({
@@ -59,4 +61,5 @@ function ProductCard({ product, index }: ProductCardProps) {
   );
 }
 
+// memo کمک می‌کند اگر props این کارت تغییر نکرده باشد، React دوباره آن را render نکند.
 export default memo(ProductCard);
