@@ -10,6 +10,7 @@ const topics = [
   ["Data Fetching", "/next-lab/data-fetching", "REST API واقعی، fetch، loading و error handling."],
   ["Cache", "/next-lab/cache", "force-cache، no-store و revalidation را عملی ببین."],
   ["TanStack Query", "/next-lab/react-query", "Server State، Cache، Loading، Error و Refetch را با React Query ببین."],
+  ["Cache Components", "/next-lab/cache-components", "یک صفحه با بخش Cached و بخش Dynamic؛ ایده Partial Pre-Rendering را عملی ببین."],
 ] as const;
 
 export default function NextLab() {
