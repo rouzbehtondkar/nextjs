@@ -6,6 +6,7 @@ import SiteFooter from "./components/layout/SiteFooter";
 import SiteHeader from "./components/layout/SiteHeader";
 import StoreProvider from "./store/StoreProvider";
 import QueryProvider from "./query/QueryProvider";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 
 const vazirmatn = Vazirmatn({
   variable: "--font-vazirmatn",
@@ -32,6 +33,8 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       <body className="min-h-full">
         {/* QueryProvider برای مدیریت Server State و Cache درخواست‌هاست. */}
         <QueryProvider>
+          {/* Devtools فقط برای بررسی Query و Cache در محیط توسعه استفاده می‌شود. */}
+          <ReactQueryDevtools initialIsOpen={false} />
           {/* Redux را در بالاترین سطح قرار می‌دهیم تا Header و صفحات همگی به Store دسترسی داشته باشند. */}
           <StoreProvider>
             <div className="min-h-screen">
