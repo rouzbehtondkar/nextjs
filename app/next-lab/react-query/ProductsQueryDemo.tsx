@@ -17,7 +17,9 @@ export default function ProductsQueryDemo() {
   } = useProducts(shouldFail);
 
   // هر ثانیه فقط شمارش معکوس UI را تازه می‌کنیم تا Fresh → Stale را جلوی چشم ببینیم.
-  const [now, setNow] = useState(() => Date.now());
+  // زمان فعلی را بعد از mount شدن Client Component از داخل useEffect می‌گیریم.
+  // این کار جلوی اجرای Date.now() هنگام prerender شدن Client Component را می‌گیرد.
+  const [now, setNow] = useState(0);
 
   useEffect(() => {
     const timer = window.setInterval(() => setNow(Date.now()), 1000);
