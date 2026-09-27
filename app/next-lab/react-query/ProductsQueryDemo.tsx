@@ -72,11 +72,16 @@ export default function ProductsQueryDemo() {
           </div>
 
           <div className="rounded-2xl border p-4" style={{ borderColor: "var(--border)" }}>
-            <p className="theme-muted text-sm">آخرین دریافت</p>
-            <p className="theme-text mt-1 font-black text-sm">
-              {dataUpdatedAt
-                ? new Date(dataUpdatedAt).toLocaleTimeString("fa-IR")
-                : "هنوز دریافت نشده"}
+            <p className="theme-muted text-sm">Cache</p>
+            <p className="theme-text mt-1 font-black">
+              {isStale ? "🟡 Stale" : "🟢 Fresh"}
+            </p>
+          </div>
+
+          <div className="rounded-2xl border p-4" style={{ borderColor: "var(--border)" }}>
+            <p className="theme-muted text-sm">Fresh تا</p>
+            <p className="theme-text mt-1 font-black">
+              {dataUpdatedAt ? `${secondsLeft} ثانیه` : "هنوز دریافت نشده"}
             </p>
           </div>
         </div>
