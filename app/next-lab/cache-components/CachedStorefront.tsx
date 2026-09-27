@@ -1,5 +1,5 @@
 import { cacheLife } from "next/cache";
-import { ProductDemo } from "../../features/home/domain/ProductDemo";
+import { demoProducts } from "../../features/home/domain/ProductDemo";
 
 export default async function CachedStorefront() {
   "use cache";
@@ -28,15 +28,15 @@ export default async function CachedStorefront() {
       </p>
 
       <div className="mt-5 grid gap-4 md:grid-cols-3">
-        {ProductDemo.slice(0, 3).map((product) => (
+        {demoProducts.slice(0, 3).map((product) => (
           <article
-            key={product.id}
+            key={product.name}
             className="rounded-2xl border p-4"
             style={{ borderColor: "var(--border)" }}
           >
             <p className="theme-muted text-xs font-bold">{product.category}</p>
             <h3 className="theme-text mt-2 font-black">{product.name}</h3>
-            <p className="theme-muted-strong mt-2 text-sm">{product.description}</p>
+            <p className="theme-muted-strong mt-2 text-sm">{product.getDeliveryInfo()}</p>
             <p className="theme-text mt-4 text-lg font-black">{product.price} تومان</p>
           </article>
         ))}
