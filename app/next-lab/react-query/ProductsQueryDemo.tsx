@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useProducts } from "../../features/products/hooks/useProducts";
 
 export default function ProductsQueryDemo() {
@@ -13,7 +13,19 @@ export default function ProductsQueryDemo() {
     isError,
     refetch,
     dataUpdatedAt,
+    isStale,
   } = useProducts(shouldFail);
+
+  // هر ثانیه فقط شمارش معکوس UI را تازه می‌کنیم تا Fresh → Stale را جلوی چشم ببینیم.
+  const [now, setNow] = useState(() => Date.now());
+
+  useEffect(() => {
+    const timer = window.setInterval(() => setNow(Date.now()), 1000);
+    return () => window.clearInterval(timer);
+  }, []);
+
+  const freshUntil = dataUpdatedAt ? dataUpdatedAt + 30 * 1000 : 0;
+  const secondsLeft = freshUntil ? Math.max(0, Math.ceil((freshUntil - now) / 1000)) : 0;
 
   return (
     <main className="mx-auto max-w-5xl px-6 py-16">
@@ -46,7 +58,7 @@ export default function ProductsQueryDemo() {
           </button>
         </div>
 
-        <div className="mt-5 grid gap-4 sm:grid-cols-3">
+        <div className="mt-5 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           <div className="rounded-2xl border p-4" style={{ borderColor: "var(--border)" }}>
             <p className="theme-muted text-sm">وضعیت</p>
             <p className="theme-text mt-1 font-black">
