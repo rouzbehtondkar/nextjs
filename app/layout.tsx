@@ -5,6 +5,7 @@ import "./globals.css";
 import SiteFooter from "./components/layout/SiteFooter";
 import SiteHeader from "./components/layout/SiteHeader";
 import StoreProvider from "./store/StoreProvider";
+import QueryProvider from "./query/QueryProvider";
 
 const vazirmatn = Vazirmatn({
   variable: "--font-vazirmatn",
@@ -29,14 +30,17 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       className={`${vazirmatn.variable} ${geistMono.variable} h-full antialiased`}
     >
       <body className="min-h-full">
-        {/* Redux را در بالاترین سطح قرار می‌دهیم تا Header و صفحات همگی به Store دسترسی داشته باشند. */}
-        <StoreProvider>
-          <div className="min-h-screen">
-            <SiteHeader />
-            {children}
-            <SiteFooter />
-          </div>
-        </StoreProvider>
+        {/* QueryProvider برای مدیریت Server State و Cache درخواست‌هاست. */}
+        <QueryProvider>
+          {/* Redux را در بالاترین سطح قرار می‌دهیم تا Header و صفحات همگی به Store دسترسی داشته باشند. */}
+          <StoreProvider>
+            <div className="min-h-screen">
+              <SiteHeader />
+              {children}
+              <SiteFooter />
+            </div>
+          </StoreProvider>
+        </QueryProvider>
       </body>
     </html>
   );

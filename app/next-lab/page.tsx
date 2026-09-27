@@ -9,6 +9,7 @@ const topics = [
   ["Client Component", "/next-lab/client-component", "با use client؛ مناسب state و eventهای مرورگر."],
   ["Data Fetching", "/next-lab/data-fetching", "REST API واقعی، fetch، loading و error handling."],
   ["Cache", "/next-lab/cache", "force-cache، no-store و revalidation را عملی ببین."],
+  ["TanStack Query", "/next-lab/react-query", "Server State، Cache، Loading، Error و Refetch را با React Query ببین."],
 ] as const;
 
 export default function NextLab() {
@@ -24,7 +25,12 @@ export default function NextLab() {
 
       <div className="grid gap-5 md:grid-cols-2">
         {topics.map(([title, href, description]) => (
-          <Link key={href} href={href} className="theme-surface rounded-3xl border p-6 transition hover:-translate-y-1" style={{ borderColor: "var(--border)" }}>
+          <Link
+            key={href}
+            href={href}
+            className="theme-surface rounded-3xl border p-6 transition hover:-translate-y-1"
+            style={{ borderColor: "var(--border)" }}
+          >
             <h2 className="theme-text text-xl font-black">{title}</h2>
             <p className="theme-muted-strong mt-3 leading-7">{description}</p>
             <span className="theme-muted mt-5 inline-block text-sm font-bold">مشاهده دمو ←</span>
