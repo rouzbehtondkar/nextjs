@@ -1,39 +1,45 @@
-import { unstable_cache } from "next/cache";
+import { cacheLife } from "next/cache";
+import { connection } from "next/server";
 import ClientApiDemo from "./ClientApiDemo";
 import RevalidateTest from "./RevalidateTest";
 
 type Post = { id: number; title: string };
-type CachedPost = Post & { apiFetchedAt: string };
+type CachedPost = Post & {
+  apiFetchedAt: string;
+  apiFetchedAtTimestamp: number;
+};
 
-export const revalidate = 20;
+// Cache داده مستقل از رندر صفحه است؛ هر ۲۰ ثانیه می‌تواند در پس‌زمینه تازه شود.
+async function getCachedPost(): Promise<CachedPost> {
+  "use cache";
+  cacheLife({ revalidate: 20 });
 
-const getCachedPost = unstable_cache(
-  async (): Promise<CachedPost> => {
-    const response = await fetch("https://jsonplaceholder.typicode.com/posts/1", {
-      cache: "no-store",
-    });
+  const response = await fetch("https://jsonplaceholder.typicode.com/posts/1");
 
-    if (!response.ok) {
-      throw new Error("API request failed");
-    }
+  if (!response.ok) {
+    throw new Error("API request failed");
+  }
 
-    const post: Post = await response.json();
+  const post: Post = await response.json();
+  const fetchedAt = new Date();
 
-    return {
-      ...post,
-      apiFetchedAt: new Date().toLocaleString("fa-IR"),
-    };
-  },
-  ["revalidate-demo-post-1"],
-  { revalidate: 20 }
-);
+  return {
+    ...post,
+    apiFetchedAt: fetchedAt.toLocaleString("fa-IR"),
+    apiFetchedAtTimestamp: fetchedAt.getTime(),
+  };
+}
 
 export default async function RevalidatePage() {
-  const generatedAt = new Date().toLocaleString("fa-IR");
+  // زمان صفحه و شناسه هر بار در زمان درخواست واقعی تولید می‌شوند.
+  await connection();
+
+  const pageStartedAt = Date.now();
+  const generatedAt = new Date(pageStartedAt).toLocaleString("fa-IR");
   const renderId = crypto.randomUUID();
   const post = await getCachedPost();
 
-  const cacheHit = post.apiFetchedAt !== generatedAt;
+  const cacheHit = post.apiFetchedAtTimestamp < pageStartedAt;
 
   return (
     <main className="mx-auto max-w-3xl px-6 py-16">
@@ -102,8 +108,8 @@ export default async function RevalidatePage() {
           <p className="theme-text font-bold">تست پیشنهادی</p>
           <ol className="theme-muted mt-3 list-decimal space-y-2 pr-5 text-sm leading-7">
             <li>صفحه را باز کن و «آخرین API Fetch» را یادداشت کن.</li>
-            <li>قبل از ۲۰ ثانیه Refresh کن؛ اگر زمان تولید صفحه تغییر کند ولی API Fetch ثابت بماند، Cache Hit را می‌بینی.</li>
-            <li>بیش از ۲۰ ثانیه صبر کن و دوباره Refresh کن؛ در Production، درخواست بعدی می‌تواند باعث Revalidation و تغییر زمان API Fetch شود.</li>
+            <li>قبل از ۲۰ ثانیه Refresh کن؛ زمان تولید صفحه باید تغییر کند ولی API Fetch معمولاً ثابت می‌ماند.</li>
+            <li>بعد از ۲۰ ثانیه Refresh کن؛ درخواست بعدی می‌تواند نسخه قبلی را نشان دهد و بازتولید را در پس‌زمینه آغاز کند. پس از تکمیل بازتولید، زمان API Fetch جدید را می‌بینی.</li>
             <li>برای دیدن API Request در Network، بخش Client Fetch پایین صفحه را استفاده کن؛ آن بخش عمداً جدا از Server Cache است.</li>
           </ol>
         </div>

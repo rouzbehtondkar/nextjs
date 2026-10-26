@@ -1,6 +1,9 @@
-export const dynamic = "force-dynamic";
+import { connection } from "next/server";
 
-export default function SSRPage() {
+// با Cache Components، رندر را تا رسیدن درخواست واقعی به سرور به تعویق می‌اندازیم.
+export default async function SSRPage() {
+  await connection();
+
   const renderedAt = new Date().toLocaleString("fa-IR");
 
   return (
