@@ -13,6 +13,7 @@ const topics = [
   ["Cache Components", "/next-lab/cache-components", "یک صفحه با بخش Cached و بخش Dynamic؛ ایده Partial Pre-Rendering را عملی ببین."],
   ["Partial Prerendering", "/next-lab/ppr", "بخش Cache‌شده و بخش پویا را با Suspense کنار هم ببین."],
   ["Optimistic UI", "/next-lab/optimistic-ui", "لایک فوری، تأیید سرور و Rollback در صورت خطا."],
+  ["Debouncing", "/next-lab/debounce", "جست‌وجوی محصولات با تأخیر کنترل‌شده برای کاهش درخواست‌های API."],
 ] as const;
 
 export default function NextLab() {
