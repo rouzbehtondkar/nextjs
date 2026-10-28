@@ -49,7 +49,7 @@ export default function OptimisticUiPage() {
       setLiked(Boolean(result.liked));
       setLikeCount(Number(result.count ?? nextCount));
       setStatus("success");
-    } catch (error) {
+    } catch {
       // Rollback: چون سرور تأیید نکرد، تغییر خوش‌بینانه را برمی‌گردانیم.
       setLiked(previousLiked);
       setLikeCount(previousCount);
